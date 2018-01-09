@@ -84,4 +84,6 @@ let main () =
   Lwt_log.notice "driver-ml-sample started..." >>= fun () ->
   serve_req tsc req_stm
 
-let () = Lwt_main.run @@ main ()
+let () =
+  try Lwt_main.run @@ main ()
+  with _ -> Printexc.print_backtrace stderr
